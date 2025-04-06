@@ -1,0 +1,35 @@
+# Wildcards:
+scenario:
+  country: ['IN']
+  weather_year: [2023]
+  # Can be 'hydrogen' or 'ammonia'
+  plant_type: 'hydrogen'
+  scenes: 'eff70_500capex_450solar_600wind_8elec_25khyd_100demand_water25' #IN_2023_hydrogen_eff70_500capex_450solar_600wind_8elec_25khyd_100demand
+
+#snakemake --cores 4 collection/IN_2023_hydrogen_eff70_500capex_650solar_600wind_8elec_25khyd_100demand --config country=IN weather_year=2023 plant_type=hydrogen scenes=eff70_500capex_650solar_600wind_8elec_25khyd_100demand
+
+# Weather data:
+# Change to a number that would be added to the 'weather_year' above and used as
+# the end weather year date
+years_to_check: 1
+
+# Frequency of data:
+freq: '1H'
+
+# Generators:
+# Modify 'generators_dict' to hold the generators you would like to use. Make
+# sure it is in the same style as below.
+generators_dict: {'Solar' : [], 'Wind' : [],}
+panel: 'CSi'
+turbine: 'NREL_ReferenceTurbine_2020ATB_4MW'
+gen_capacity:
+    solar: 1
+    wind: 4
+
+# Other:
+solver : 'cbc'
+water_limit: False
+
+transport:
+    pipeline_construction: True
+    road_construction: True
